@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل السنة الأولى | KSU 2026</title>
+    <meta name="description" content="دليلك الشامل للنجاح في السنة الأولى المشتركة - مقررات، أدوات، نصائح، وتحذيرات مهمة">
+    <meta name="theme-color" content="#0077be">
+    
+    <!-- خطوط وأيقونات -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ملفات التطبيق -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="images/icon-192.png">
+</head>
+<body>
+
+    <!-- الهيدر الرئيسي -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="user-info">
+                    <div class="avatar">🎓</div>
+                    <div class="welcome-text">
+                        <h1 id="welcomeMsg">يا هلا والله، <span id="userName">يا بطل</span> 👋</h1>
+                        <span class="track-badge" id="userTrack">جاري تحديد مسارك...</span>
+                    </div>
+                </div>
+                <button class="notif-btn" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-dot" id="notifDot"></span>
+                </button>
+            </div>
+            
+            <!-- شريط تقدم الترم -->
+            <div class="term-progress">
+                <div class="progress-info">
+                    <span>باقي على نهاية الترم</span>
+                    <span id="daysLeft" class="days-count">-- يوم</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="termProgressBar" style="width: 45%"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- 🚨 تنبيه مشروع الـ CA (الأولوية القصوى) -->
+        <section class="ca-alert-section" id="caAlertSection">
+            <div class="ca-alert-card">
+                <div class="ca-header">
+                    <div class="ca-icon-pulse">📝</div>
+                    <div class="ca-info">
+                        <h3>مشروع الإنجليزي (CA) - مهم جداً!</h3>
+                        <p class="ca-deadline">⚠️ التسليم قرب: باقي <span id="caCountdown" class="countdown-number">--</span> أيام</p>
+                    </div>
+                    <div class="ca-importance">
+                        <span class="weight-badge">20%</span>
+                        <small>من درجة المادة</small>
+                    </div>
+                </div>
+                
+                <div class="ca-body">
+                    <p class="ca-warning">
+                        <strong>اسمعني زين يا بطل:</strong> هذا المشروع عليه درجات ترفع معدلك فوق! لا تغامر وتستخدم الذكاء الاصطناعي (ChatGPT وغيره) ترى الدكاترة يكشفونه بضغطة زر وتأخذ صفر مضمون! 😰
+                    </p>
+                    
+                    <div class="ca-actions">
+                        <button onclick="openCAGuide()" class="btn-outline">
+                            <i class="fas fa-info-circle"></i>
+                            وش المطلوب بالضبط؟
+                        </button>
+                        <button onclick="contactSanadForCA()" class="btn-sanad">
+                            <i class="fab fa-telegram-plane"></i>
+                            فزعة "سند" (مضمونة 100%)
+                        </button>
+                    </div>
+                    
+                    <div class="ca-tip">
+                        💡 <strong>نصيحة ذهبية:</strong> منصة سند عندهم طلاب متخرجين يساعدونك بشكل بشري وآمن، بدون أي ذكاء اصطناعي!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- المقررات الدراسية (تتغير حسب المسار والترم) -->
+        <section class="courses-section">
+            <div class="section-header">
+                <h2><i class="fas fa-book"></i> مقرراتك هذا الترم</h2>
+                <div class="term-selector">
+                    <button id="term1Btn" class="term-btn active" onclick="switchTerm('first')">الترم الأول</button>
+                    <button id="term2Btn" class="term-btn" onclick="switchTerm('second')">الترم الثاني</button>
+                </div>
+            </div>
+            
+            <div class="courses-container" id="coursesContainer">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    جاري تحميل مقررات مسارك...
+                </div>
+            </div>
+        </section>
+
+        <!-- الأدوات السريعة -->
+        <section class="tools-section">
+            <h2><i class="fas fa-toolbox"></i> أدوات تفيدك</h2>
+            <div class="tools-grid">
+                <div class="tool-card popular" onclick="openTool('gpa')">
+                    <div class="tool-badge">الأكثر استخداماً</div>
+                    <div class="tool-icon">🧮</div>
+                    <h3>حاسبة المعدل</h3>
+                    <p>احسب معدلك التراكمي والفصلي</p>
+                </div>
+                
+                <div class="tool-card" onclick="openTool('absence')">
+                    <div class="tool-icon">📊</div>
+                    <h3>حاسبة الغياب</h3>
+                    <p>تتبع نسبة غيابك من كل مادة</p>
+                </div>
+                
+                <div class="tool-card" onclick="openTool('timer')">
+                    <div class="tool-icon">⏰</div>
+                    <h3>مؤقت المذاكرة</h3>
+                    <p>تقنية بومودورو للتركيز</p>
+                </div>
+                
+                <div class="tool-card" onclick="openTool('map')">
+                    <div class="tool-icon">🗺️</div>
+                    <h3>خريطة القاعات</h3>
+                    <p>اعرف مكان قاعتك بسهولة</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- النصائح اليومية -->
+        <section class="daily-tips">
+            <h2><i class="fas fa-lightbulb"></i> نصيحة اليوم</h2>
+            <div class="tip-card" id="dailyTipCard">
+                <div class="tip-icon">💡</div>
+                <div class="tip-content">
+                    <p id="dailyTipText">جاري تحميل نصيحة اليوم...</p>
+                    <small class="tip-source">من طلاب متخرجين</small>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- الناف بار السفلي -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="courses.html" class="nav-item">
+            <i class="fas fa-book"></i>
+            <span>المقررات</span>
+        </a>
+        <a href="games.html" class="nav-item">
+            <i class="fas fa-gamepad"></i>
+            <span>الألعاب</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>حسابي</span>
+        </a>
+    </nav>
+
+    <!-- تحميل ملفات JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- تسجيل Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(registration => {
+                    console.log('✅ Service Worker مسجل بنجاح');
+                })
+                .catch(error => {
+                    console.error('❌ خطأ في تسجيل Service Worker:', error);
+                });
+        }
+    </script>
+    
+</body>
+</html>
